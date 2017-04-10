@@ -1,5 +1,19 @@
-<footer>
-	<p>Copyrights || All rights reserved</p>
-</footer>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var socket = io();
+	var form = document.querySelector('form');
+	var message = document.getElementById('m');
+	var messages = document.getElementById('messages');
+	var listItem = document.querySelector('li');
+	form.addEventListener('submit', function(){
+		event.preventDefault();
+		socket.emit('chat message', message.value);
+		message.value = "";
+		return false;
+	});
+	socket.on('chat message', function(msg){
+		messages.innerHTML += '<li>' + msg + '</li>';
+	});
+</script>
 </body>
 </html>

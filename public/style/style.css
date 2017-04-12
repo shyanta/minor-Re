@@ -4,42 +4,113 @@
 	box-sizing: border-box;
 }
 
+header h1 {
+	margin: 0;
+	padding: 0;
+	line-height: 2;
+	width: 100%;
+	text-align: center;
+	background-color: #004346;
+	color: white;
+}
+
 body {
 	font: 13px Helvetica, Arial;
 }
 
-form {
-	background: #000;
-	padding: 3px;
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-}
-
-form input {
-	border: 0;
-	padding: 10px;
-	width: 90%;
-	margin-right: .5%;
-}
-
-form button {
-	width: 9%;
-	background: rgb(130, 224, 255);
-	border: none;
-	padding: 10px;
-}
-
 #messages {
-	list-style-type: none;
+	background-image: url(../img/chat-bg.jpg);
+	background-size: cover;
+	background-position: center;
+	padding: 0 .8em;
 	margin: 0;
-	padding: 0;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 83px);
+	max-width: 100%;
+	overflow-y: scroll;
 }
-
-#messages li {
-	padding: 5px 10px;
+	#messages li {
+		width: auto;
+		padding: .4em .6em;
+		border-radius: 10px;
+		margin: 1em 0 0 0;
+	}
+		#messages li[data-status="send"] + li[data-status="send"] {
+			margin: .1em 0;
+		}
+		#messages li[data-status="received"] + li[data-status="received"] {
+			margin: .1em 0;
+		}
+		#messages li:focus {
+			outline-style: none;
+			box-shadow: 0 0 10px #999;
+		}
+		#messages li[data-status="send"]{
+			background-color: #74B3CE;
+			align-self: flex-end;
+			position: relative;
+		}
+			#messages li[data-status="send"]:before {
+				content: '';
+				width: 0px;
+				height: 0px;
+				border-style: solid;
+				border-width: 0 0 18px 20px;
+				border-color: transparent transparent transparent #74B3CE;
+				top: 0;
+				right: -11px;
+				position: absolute;
+			}
+		#messages li[data-status="received"]{
+			background-color: #508991;
+			align-self: flex-start;
+			position: relative;
+		}
+			#messages li[data-status="received"]:before {
+				content: '';
+				width: 0px;
+				height: 0px;
+				border-style: solid;
+				border-width: 0 20px 18px 0;
+				border-color: transparent #508991 transparent transparent;
+				top: 0;
+				left: -11px;
+				position: absolute;
+			}
+			#messages li p {
+				font-size: 1.5em;
+				margin: 0 0 .3em 0;
+			}
+			#messages li footer {
+				font-size: .6em;
+				text-align: right;
+			}
+				#messages li[data-status="send"] footer {
+					text-align: left;
+				}
+				#messages li footer p {
+					margin: 0;
+					color: #fff;
+				}
+form {
+	display: flex;
+	flex-direction: row;
+	line-height: 2;
 }
-
-#messages li:nth-child(odd) {
-	background: #eee;
-}
+	form input {
+		flex-grow: 5;
+		border: 0;
+		line-height: 2;
+		outline-color: #09BC8A;
+		transition: .3s;
+	}
+	form button[type="submit"]{
+		flex-grow: 1;
+		background-color: #09BC8A;
+		color: white;
+		line-height: 2;
+		font-size: 1.2em;
+		border: 0;
+	}

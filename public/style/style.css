@@ -56,6 +56,7 @@ body {
 	#user form input {
 		flex-basis: 100%;
 		line-height: 2;
+		font-size: 16px;
 		height: 2em;
 		border: 0;
 		border-radius: 5px;
@@ -168,6 +169,10 @@ body {
 				font-size: 1.5em;
 				margin: 0 0 .3em 0;
 			}
+			#messages li header {
+				font-weight: bold;
+				font-size: 1em;
+			}
 			#messages li footer {
 				font-size: .6em;
 				text-align: right;
@@ -190,6 +195,7 @@ form {
 		line-height: 2;
 		outline-color: #09BC8A;
 		transition: .3s;
+		font-size: 16px;
 	}
 	form button[type="submit"]{
 		flex-grow: 1;

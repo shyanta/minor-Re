@@ -18,12 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shyanta/minor-Re.git"
+    "url": "git+https://github.com/shyanta/minor-RealTimeWeb.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/shyanta/minor-Re/issues"
+    "url": "https://github.com/shyanta/minor-RealTimeWeb/issues"
   },
-  "homepage": "https://github.com/shyanta/minor-Re#readme"
+  "homepage": "https://github.com/shyanta/minor-RealTimeWeb#readme"
 }

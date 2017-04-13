@@ -10,4 +10,8 @@ directly, you don't want to wait around for multiple seconds.
 This is why real-time is very popular right now. It's fast and more importantly, it's what people
 expect, and as a frontend developer this is what should trigger you.
 
+## What did I make
+For this project we worked with socket.io. I made a chat app, working with socket.io.
+First I made the basics of a chat app. Online people can send a chat to other online people.
+
 ## Sources

@@ -8,7 +8,7 @@ var userNameInput = document.getElementById('username');
 var userSection = document.getElementById('user');
 var userForm = document.getElementById('user_form');
 	userSection.setAttribute("class", "");
-var username;
+var username = undefined;
 
 if (username === undefined){
 	userSection.setAttribute("class", "visible");

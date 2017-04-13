@@ -24,6 +24,13 @@ messages will be on the left.
 
 Also each message contains the username, and a day and time of when the message was send.
 
+## Features
+-	Live Chat
+-	Usernames
+-	Day and Time per message
+-	Styling, depending if send by you or someone else
+-	Autoscrolling
+
 ## Wishes
 -	I want to add a notification when someone enters the chat
 -	I want to work with a database eventually, so you can upload pictures, maybe a login with chatrooms.

@@ -36,22 +36,8 @@ socket.on('chat message', function(msg, name, id){
 			status = "received";
 		}
 	var d = new Date();
-	var day;
-		if (d.getDay() == 0){
-			day = "Sunday";
-		} else if (d.getDay() == 1){
-			day = "Monday";
-		} else if (d.getDay() == 2){
-			day = "Tuesday";
-		} else if (d.getDay() == 3){
-			day = "Wednesday";
-		} else if (d.getDay() == 4){
-			day = "Thursday";
-		} else if (d.getDay() == 5){
-			day = "Friday";
-		} else {
-			day = "Saturday";
-		}
+	var day = d.getDay();
+	var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 	var hour = d.getHours();
 	var minute = d.getMinutes();
 	var minuteString = minute.toString();
@@ -61,7 +47,7 @@ socket.on('chat message', function(msg, name, id){
 			minute = '' + d.getMinutes();
 		}
 
-	messages.innerHTML += '<li data-status="' + status + '"><header>'+ name + ' says:</header><p>' + msg + '</p><footer><p> Posted on '+ day + ', ' + hour + ':' + minute + '</footer></li>';
+	messages.innerHTML += '<li data-status="' + status + '"><header>'+ name + ' says:</header><p>' + msg + '</p><footer><p> Posted on '+ days[day] + ', ' + hour + ':' + minute + '</footer></li>';
 
 	messages.scrollTop = messages.scrollHeight;
 });

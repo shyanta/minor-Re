@@ -31,7 +31,7 @@ form.addEventListener('submit', function(){
 socket.on('chat message', function(msg, name, id){
 	var status;
 		if (socket.id === id) {
-			status = "send";
+			status = "sent";
 		} else {
 			status = "received";
 		}
@@ -61,7 +61,7 @@ socket.on('chat message', function(msg, name, id){
 			minute = '' + d.getMinutes();
 		}
 
-	messages.innerHTML += '<li data-status="' + status + '"><header>'+ name + '</header><p>' + msg + '</p><footer><p> Posted on '+ day + ', ' + hour + ':' + minute + '</footer></li>';
+	messages.innerHTML += '<li data-status="' + status + '"><header>'+ name + ' says:</header><p>' + msg + '</p><footer><p> Posted on '+ day + ', ' + hour + ':' + minute + '</footer></li>';
 
 	messages.scrollTop = messages.scrollHeight;
 });

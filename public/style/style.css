@@ -4,6 +4,13 @@
 	box-sizing: border-box;
 }
 
+body {
+	font: 13px Helvetica, Arial;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
 header h1 {
 	margin: 0;
 	padding: 0;
@@ -12,13 +19,6 @@ header h1 {
 	text-align: center;
 	background-color: #004346;
 	color: white;
-}
-
-body {
-	font: 13px Helvetica, Arial;
-	position: relative;
-	display: flex;
-	flex-direction: column;
 }
 
 #user.visible {
@@ -123,7 +123,7 @@ body {
 	#messages li:last-child {
 		margin-bottom: 20px !important;
 	}
-		#messages li[data-status="send"] + li[data-status="send"] {
+		#messages li[data-status="sent"] + li[data-status="sent"] {
 			margin: .1em 0;
 		}
 		#messages li[data-status="received"] + li[data-status="received"] {
@@ -133,12 +133,12 @@ body {
 			outline-style: none;
 			box-shadow: 0 0 10px #999;
 		}
-		#messages li[data-status="send"]{
+		#messages li[data-status="sent"]{
 			background-color: #74B3CE;
 			align-self: flex-end;
 			position: relative;
 		}
-			#messages li[data-status="send"]:before {
+			#messages li[data-status="sent"]:before {
 				content: '';
 				width: 0px;
 				height: 0px;
@@ -170,14 +170,15 @@ body {
 				margin: 0 0 .3em 0;
 			}
 			#messages li header {
-				font-weight: bold;
+				font-weight: 800;
 				font-size: 1em;
+				margin-bottom: 4px;
 			}
 			#messages li footer {
 				font-size: .6em;
 				text-align: right;
 			}
-				#messages li[data-status="send"] footer {
+				#messages li[data-status="sent"] footer {
 					text-align: left;
 				}
 				#messages li footer p {

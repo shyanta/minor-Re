@@ -11,30 +11,60 @@ This is why real-time is very popular right now. It's fast and more importantly,
 expect, and as a frontend developer this is what should trigger you.
 
 ## Live Link
-The live chat can be found on the following link: <br/>
-[Live Chatroom with Socket.io](https://minor-realtimeweb-chat.herokuapp.com/)
+The live twitter stream can be found on the following link: <br/>
+[Live Twitter Stream with Socket.io](https://minor-realtimeweb-chat.herokuapp.com/)
 
 ## What did I make
-For this project we worked with socket.io. I made a chat app, working with socket.io.
-First I made the basics of a chat app. Online people can send a chat to other online people.
-After that I added some features, such as, styling for the chat.
-Also I checked if the message was send by yourself or by someone else, so I could style the
-messages. What is send by yourself will be on the right side of the screen. And the received
-messages will be on the left.
+In this app each person can track a hashtag from twitter. They can choose every hashtag they want.
+The stream is realtime so the tweets keep popping in.
 
-Also each message contains the username, and a day and time of when the message was send.
+## setup
+### Create an app
+Create an app on your twitter account.
+
+## How does the code work
+### Connect with twitter API
+```js
+var Twit = require('twit');
+
+var twitter = new Twit({
+	consumer_key: process.env.TWITTER_CONSUMER_KEY,
+	consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+	access_token: process.env.TWITTER_ACCESS_TOKEN,
+	access_token_secret: process.env.TWITTER_TOKEN_SECRET
+});
+// Get all Tweets around the world, this is a "bounding box" this coordinates are the whole globe.
+// More info add: https://dev.twitter.com/streaming/overview/request-parameters#locations
+var globe = ['-180','-90','180','90'];
+
+// Start Twitter streaming API
+var stream = twitter.stream('statuses/filter', { locations: globe });
+stream.on('tweet', function (tweet) {
+	// If tweet has Hashtags
+	var tweetHashtags = tweet.entities.hashtags;
+	// Check if there are hashtags in Tweet, if yes run the code.
+	if (tweetHashtags.length >= 1) {
+		for (var h = 0; h < tweetHashtags.length; h++) {
+		// Get hashtag text and convert to lowercase and remove ' + "
+		var getHashTag = tweetHashtags[h].text.toLowerCase().replace(/"/g, '').replace(/'/g, '');
+		ee.emit('tweet_hash_test', getHashTag, tweet.text, tweet.user.screen_name);
+		}
+	}
+});
+stream.on('disconnect', function (disconnect) {
+	io.emit('error');
+});
+```
+
 
 ## Features
--	Live Chat
--	Usernames
--	Day and Time per message
--	Styling, depending if send by you or someone else
--	Autoscrolling
+-	Different stream per socket user
+-	RealTime Twitter stream
+-	Search input Hashtag
 
 ## Wishes
--	I want to add a notification when someone enters the chat
--	I want to work with a database eventually, so you can upload pictures, maybe a login with chatrooms.
-	So every user can have access to different chatrooms.
+-	Create a tunnel event
+-	After disconnect, ask for new Hash
 
 ## Sources
 -	[Get started chat - Socket.io](https://socket.io/get-started/chat/)

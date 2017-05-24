@@ -3,38 +3,25 @@ var form = document.getElementById('message_form');
 var message = document.getElementById('field-message');
 var messages = document.getElementById('messages');
 var listItem = document.querySelector('li');
-var userNameInput = document.getElementById('username');
+var userNameInput = document.getElementById('hashtag');
 
 var userSection = document.getElementById('user');
 var userForm = document.getElementById('user_form');
-	userSection.setAttribute("class", "");
-var username = undefined;
+	userSection.removeAttribute("class", "visible");
+var hashtag = undefined;
 
-if (username === undefined){
+if (hashtag === undefined){
 	userSection.setAttribute("class", "visible");
 	userForm.addEventListener('submit', function(){
 		event.preventDefault();
-		username = userNameInput.value;
+		hashtag = userNameInput.value;
 		userNameInput.value="";
-		userSection.setAttribute("class","");
+		socket.emit('hashtag_search', hashtag);
+		userSection.removeAttribute("class","visible");
 	})
 }
 
-form.addEventListener('submit', function(){
-	event.preventDefault();
-	socket.emit('chat message', message.value, username);
-	message.value = "";
-	return false;
-});
-
-
-socket.on('chat message', function(msg, name, id){
-	var status;
-		if (socket.id === id) {
-			status = "sent";
-		} else {
-			status = "received";
-		}
+socket.on('tweet_body', function(body, user, hashtag){
 	var d = new Date();
 	var day = d.getDay();
 	var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -46,8 +33,6 @@ socket.on('chat message', function(msg, name, id){
 		} else {
 			minute = '' + d.getMinutes();
 		}
-
-	messages.innerHTML += '<li data-status="' + status + '"><header>'+ name + ' says:</header><p>' + msg + '</p><footer><p> Posted on '+ days[day] + ', ' + hour + ':' + minute + '</footer></li>';
-
+	messages.innerHTML += '<li data-status="received"><header>@'+ user + ' </header><p>' + body + '</p><footer><p> Posted on '+ days[day] + ', ' + hour + ':' + minute + '</footer></li>';
 	messages.scrollTop = messages.scrollHeight;
-});
+})

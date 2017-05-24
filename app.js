@@ -63,12 +63,7 @@ stream.on('disconnect', function (disconnect) {
 
 io.on('connection', function(socket){
 	console.log('a user connected');
-	if (socket.hashtag === ""){
-		console.log('no hash');
-		io.emit('get_new_hashtag')
-	}
 	socket.on('hashtag_search', function(hashtag){
-		console.log('yes hash');
 		socket.hashtag = hashtag.toLowerCase().replace(/"/g, '').replace(/'/g, '');
 		ee.on('tweet_hash_test', function(hashtag, tweet, username){
 			if (hashtag === socket.hashtag){
@@ -78,7 +73,6 @@ io.on('connection', function(socket){
 	});
 	socket.on('disconnect', function(disconnect){
 		console.log('user disconnected');
-		
 	});
 });
 

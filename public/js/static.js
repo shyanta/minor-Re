@@ -5,6 +5,7 @@ var messages = document.getElementById('messages');
 var listItem = document.querySelector('li');
 var userNameInput = document.getElementById('hashtag');
 
+var noConnection = document.getElementById('connection');
 var userSection = document.getElementById('user');
 var userForm = document.getElementById('user_form');
 	userSection.removeAttribute("class", "visible");
@@ -20,6 +21,15 @@ if (hashtag === undefined){
 		userSection.removeAttribute("class","visible");
 	})
 }
+socket.on('connect', function(){
+	userSection.setAttribute("class","visible");
+	noConnection.removeAttribute("class", "visible");
+	messages.innerHTML = "";
+})
+socket.on('disconnect', function() {
+	noConnection.setAttribute("class", "visible");
+	console.log('disconnected');
+})
 
 socket.on('tweet_body', function(body, user, hashtag){
 	var d = new Date();
